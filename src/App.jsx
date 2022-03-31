@@ -1,18 +1,13 @@
 import React from 'react';
 import { Outlet, Link } from "react-router-dom";
+import NavBar from './components/NavBar';
+import './App.css'
 
 const App = () => {
   
   return (
     <div>
-      <nav 
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem"
-        }}>
-        <Link to="/">Home</Link> 
-        <Link to="/getData">Seasons</Link>
-      </nav>
+      <NavBar />
       <Outlet />
     </div>
   )

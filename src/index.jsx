@@ -16,7 +16,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-          <Route path='getData' element={<GetData />} />
+          <Route path='seasons' element={<GetData />} />
         </Route>
       </Routes>
     </BrowserRouter>
