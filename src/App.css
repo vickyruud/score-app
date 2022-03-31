@@ -6,3 +6,18 @@
   color: #00f;
   text-decoration: none;
 }
+
+.link-responsive {
+  text-decoration: none;
+  color: rgb(8, 8, 8);
+}
+#league-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.data-display {
+  display: flex;
+  flex-direction: column;
+}

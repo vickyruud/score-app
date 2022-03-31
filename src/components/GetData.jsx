@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getSeasons } from '../api-helpers/seasons';
+import { getSeasons, getSpecificSeason } from '../api-helpers/seasons';
+import LeagueDetails from './LeagueDetails';
+import Loading from './Loading';
+import SeasonDetails from './SeasonDetails';
 
 
 const GetData = () => {
@@ -10,13 +13,15 @@ const GetData = () => {
   })
 
   useEffect(() => {
-    getSeasons().then(res => {
+    getSeasons(2021).then(res => {
+      console.log(res);
       setState(s => ({
         ...s,
-        data: res.seasons,
+        data: res,
         loading:false
       }))
-   })
+    })
+    
  }, [])
   
   const arrayData = state.data.map((item, i) => {
@@ -39,8 +44,10 @@ const GetData = () => {
   
 
   return (
-    <div>
-      {state.loading ? <div>Loading data</div> : <div>{arrayData}</div>}
+    <div className='data-display'>
+      <LeagueDetails />
+      <SeasonDetails />
+      {state.loading ? <Loading /> : <div>{arrayData}</div>}
     </div>
   )
 }

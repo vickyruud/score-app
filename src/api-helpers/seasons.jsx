@@ -7,10 +7,12 @@ let config = {
   }
 
 //function to get competition data
-export const getSeasons = () => {
-  return fetch('http://api.football-data.org/v2/competitions/2021', config).then(res => {
+export const getSeasons = (leagueID) => {
+  return fetch(`http://api.football-data.org/v2/competitions/${leagueID}`, config).then(res => {
     return res.json()
   }).then(response => {
-    return response
+
+    return response.seasons
   })
 };
+

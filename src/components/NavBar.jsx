@@ -83,7 +83,9 @@ const NavBar = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                   {page === 'Home' && <Link className="link-responsive" to="/">Home</Link>}
+                   {page === 'Seasons' && <Link className="link-responsive" to="/seasons">Seasons</Link>}
+                   {page === 'Winners' && <Link className="link-responsive" to="/winners">Winners</Link>}
                 </MenuItem>
               ))}
             </Menu>
