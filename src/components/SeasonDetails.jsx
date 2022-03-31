@@ -26,7 +26,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function SeasonDetails() {
+export default function SeasonDetails(props) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -46,20 +46,18 @@ export default function SeasonDetails() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Manchester United"
-        subheader="The Red Devils"
+        title={`${props.clubName}`}
+        subheader={`Winners ${props.year}`}
       />
       <CardMedia
         component="img"
         height="194"
-        image="https://crests.football-data.org/66.png"
+        image={props.crest}
         alt="Crest"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-         Manchester United Football Club is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League, the top flight of English football.
-         Nicknamed the Red Devils, the club was founded as Newton Heath LYR Football Club in 1878, but changed its name to Manchester United in 1902.
-         The club moved from Newton Heath to its current stadium, Old Trafford, in 1910.
+         {props.shortName}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

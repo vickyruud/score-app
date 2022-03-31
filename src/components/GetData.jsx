@@ -3,13 +3,25 @@ import { getSeasons, getSpecificSeason } from '../api-helpers/seasons';
 import LeagueDetails from './LeagueDetails';
 import Loading from './Loading';
 import SeasonDetails from './SeasonDetails';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 const GetData = () => {
   const [state, setState] = useState({
     data: [],
     loading: true,
-    error : false,
+    error: false,
+    
   })
 
   useEffect(() => {
@@ -26,16 +38,15 @@ const GetData = () => {
   
   const arrayData = state.data.map((item, i) => {
     let winner = item.winner
-    if (winner) {
-      
+    console.log(winner);
+    let year = item.endDate.substring(0,4)
+    if (winner === null) {  
+      return
+      } else {
       return (
-        <div key={i}>
-          Year: {item.endDate}
-          Winner : {winner.name}
-      </div>
-    )
-    } else {
-      return null;
+        <SeasonDetails year={year} crest={winner.crestUrl} clubName={winner.name}/>
+          
+        )
   }
   })
   
@@ -46,7 +57,6 @@ const GetData = () => {
   return (
     <div className='data-display'>
       <LeagueDetails />
-      <SeasonDetails />
       {state.loading ? <Loading /> : <div>{arrayData}</div>}
     </div>
   )
