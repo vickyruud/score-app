@@ -1,33 +1,46 @@
-import React, { useEffect } from 'react';
-import { getCompetitions } from '../api-helpers/competitions';
+import React, { useEffect, useState } from 'react';
+import { getSeasons } from '../api-helpers/seasons';
 
 
 const GetData = () => {
-  const [data, setData] = React.useState();
-  const [error, setError] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-
- 
-  
-  
+  const [state, setState] = useState({
+    data: [],
+    loading: true,
+    error : false,
+  })
 
   useEffect(() => {
-    getCompetitions().then(response => {
-      setData(response);
-      setLoading(true);
-      console.log(data);
-    }).catch(error => {
-      setError(true);
+    getSeasons().then(res => {
+      setState(s => ({
+        ...s,
+        data: res.seasons,
+        loading:false
+      }))
    })
-    
-  }, [])
+ }, [])
   
+  const arrayData = state.data.map((item, i) => {
+    let winner = item.winner
+    if (winner) {
+      
+      return (
+        <div key={i}>
+          Year: {item.endDate}
+          Winner : {winner.name}
+      </div>
+    )
+    } else {
+      return null;
+  }
+  })
   
+
+ 
   
 
   return (
     <div>
-      {data ? <div>Hello</div> : <div>Error loading data</div>}
+      {state.loading ? <div>Loading data</div> : <div>{arrayData}</div>}
     </div>
   )
 }
